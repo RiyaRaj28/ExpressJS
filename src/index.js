@@ -1,6 +1,7 @@
 const express = require("express");
 const path = require("path");
 const app = express();
+const hbs = require("hbs");
 const port = 8000;
 
 //built in middleware 
@@ -9,11 +10,13 @@ const port = 8000;
 
 //makes you exit the src file and enter into the public folder!
 const staticPath = path.join(__dirname, "../public");
-const templatePath = path.join(__dirname, "../templates");
+const templatePath = path.join(__dirname, "../templates/views");
+const partialsPath = path.join(__dirname, "../templates/partials");
 
 //to set the view engine
 app.set("view engine", "hbs");
 app.set("views", templatePath); 
+hbs.registerPartials(partialsPath)           //in the template engine hbs, we use the method require partials and add the absolute path of partial file
 
 app.use(express.static(staticPath));
 
@@ -25,8 +28,19 @@ app.get("/", (req, res) => {
     });
 });
 
-app.get("/about", (reqq,res) => {
+app.get("/about", (req,res) => {
     res.render("about");
+});
+
+app.get ("/about/*", (req,res) => {
+    res.render("404", {
+        errorcomment : "Oops this about us page could not be found!"
+    });
+})
+app.get("*", (req,res) => {
+    res.render("404", {
+        errorcomment : "Oops page could not be found!"
+    });
 })
 
 app.get("/", (req, res)=> {
