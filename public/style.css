@@ -202,3 +202,16 @@
 .center{
     text-align: center;
 }
+
+/* footer style  */
+.header{
+    width: 100%;
+    height: 5 rem;
+    background-color: #0a183d;
+
+}
+
+.header p {
+    color : #fff;
+    text-align: center;   
+}
