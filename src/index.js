@@ -21,7 +21,7 @@ hbs.registerPartials(partialsPath)           //in the template engine hbs, we us
 app.use(express.static(staticPath));
 
 
-// template engine route 
+// template engine route - hbs
 app.get("/", (req, res) => {
     res.render("index.hbs", {
         name : "Riya", 
@@ -29,7 +29,10 @@ app.get("/", (req, res) => {
 });
 
 app.get("/about", (req,res) => {
-    res.render("about");
+    // console.log(req.query)
+    res.render("about", {
+        name : req.query.name
+    });
 });
 
 app.get ("/about/*", (req,res) => {
