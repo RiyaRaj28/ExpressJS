@@ -47,7 +47,7 @@ app.get("*", (req,res) => {
 })
 
 app.get("/", (req, res)=> {
-    res.send("hello from express server");
+    res.send("hello  from express server");
 });
 
 app.listen(port, () => {
